@@ -7,7 +7,6 @@ Repository to allow you to switch to various AWS Accounts, rotate your access ke
 
 ### Components
 * switcher.py
-* profiles_example.json
 * profiles.json
 
 #### What to do? 
