@@ -1,4 +1,4 @@
-##AWS Account Switcher
+## AWS Account Switcher
 
 `WARNING => Make a backup of your .aws/credentials folder before using this utility!
  Also the default rotation time is 30 days!`
