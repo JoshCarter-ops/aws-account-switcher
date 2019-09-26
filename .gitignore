@@ -4,3 +4,5 @@ generated/
 *.iml
 .DS_Store
 profiles.json
+profiles_example.json
+

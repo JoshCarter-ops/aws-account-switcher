@@ -22,3 +22,29 @@ Repository to allow you to switch to various AWS Accounts, rotate your access ke
  This was initially written by myself for the developers where I work, it was suggested that I open source it because
   'it's a nightmare switching accounts/roles manually!'. 
  `
+
+### profiles.json example
+`
+{
+  "profiles": [
+    {
+      "type": "personal",
+      "role": "role",
+      "account_number": "0011223344",
+      "username": "someone@example.com",
+      "aws_access_key_id": "PERSONALACCESSKEY",
+      "aws_secret_access_key": "PERSONALSECRETACCESSKEY",
+      "mfa": "arn:aws:iam::0011223344:mfa/someone@example.com"
+    },
+    {
+      "type": "work",
+      "role": "role",
+      "account_number": "0011223355",
+      "username": "someone@work.com",
+      "aws_access_key_id": "WORKACCESSKEY",
+      "aws_secret_access_key": "WORKSECRETACCESSKEY",
+      "mfa": "arn:aws:iam::0011223355:mfa/someone@example.com"
+    }
+  ]
+}
+`
