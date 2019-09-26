@@ -1,0 +1,6 @@
+.idea/
+target/
+generated/
+*.iml
+.DS_Store
+profiles.json
