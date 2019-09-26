@@ -2,20 +2,20 @@
   "profiles": [
     {
       "type": "personal",
-      "account_number": "0011223344",
       "role": "role",
-      "aws_access_key_id": "ACCESSKEY",
-      "aws_secret_access_key": "SECRETACCESSKEY",
+      "account_number": "0011223344",
       "username": "someone@example.com",
+      "aws_access_key_id": "PERSONALACCESSKEY",
+      "aws_secret_access_key": "PERSONALSECRETACCESSKEY",
       "mfa": "arn:aws:iam::0011223344:mfa/someone@example.com"
     },
     {
       "type": "work",
-      "account_number": "0011223355",
       "role": "role",
+      "account_number": "0011223355",
+      "username": "someone@work.com",
       "aws_access_key_id": "WORKACCESSKEY",
       "aws_secret_access_key": "WORKSECRETACCESSKEY",
-      "username": "someone@work.com",
       "mfa": "arn:aws:iam::0011223355:mfa/someone@example.com"
     }
   ]
