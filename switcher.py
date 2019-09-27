@@ -76,6 +76,11 @@ def get_key_meta_data():
     return json.loads(bash('aws iam list-access-keys --user-name {}'.format(username)))['AccessKeyMetadata'][0]
 
 
+def check_key_quota():
+    data = json.loads(bash('aws iam list-access-keys --user-name {}'.format(username)))
+    return len(data['AccessKeyMetadata'])
+
+
 def format_date(date_to_format):
     return date(int(date_to_format[0:4]), int(date_to_format[5:7]), int(date_to_format[8:10]))
 
@@ -85,6 +90,10 @@ def rotate_keys():
     create_date = format_date(get_key_meta_data()['CreateDate'])
     delta = today - create_date
     log('INFO', 'Key Age: {} days old'.format(str(delta.days)))
+
+    if check_key_quota() > 1:
+        log('INFO', 'You have 2 keys attached to your account, please remove 1 to allow key rotation.')
+        return
 
     if delta.days > 30:
         dated_key = profile_json['aws_access_key_id']
