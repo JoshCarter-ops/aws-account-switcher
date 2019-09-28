@@ -129,6 +129,10 @@ def assume_role():
     command = "aws sts assume-role"
     command += " --role-arn arn:aws:iam::{}:role/{}".format(profile_json['account_number'], role)
     command += " --role-session-name AWS-CLI-Session"
+    if profile_json['duration'] == "":
+        command += " --duration-seconds 3600"
+    else:
+        command += " --duration-seconds {}".format(profile_json['duration'])
     command += " --serial-number {} --token-code ".format(profile_json['mfa'])
     command += getpass('[INPUT] - MFA Code: (Hidden) ')
 
@@ -157,9 +161,16 @@ if __name__ == '__main__':
     account_decision = input(ask_the_question())
     write_standard_account(account_decision)
     rotate_keys()
-    decider = input(
-        '[INFO]: Would you like to assume the {} role?\n[1] YES\n[2] NO\n[INPUT]: '.format(profile_json['role']))
-    if str(decider) == "1":
-        write_session(assume_role())
+    question = '[INFO]: Would you like to assume the {} role?\n[1] YES\n[2] NO\n[INPUT]: '
+
+    if profile_json['role'] != "":
+        decider = input(question.format(profile_json['role']))
+        if str(decider) == "1":
+            write_session(assume_role())
+        else:
+            log('INFO', "Logging in with {}'s mfa.".format(username))
+            write_session(mfa())
     else:
+        log('INFO', "No role found in profiles.json, logging in with {}'s mfa.".format(username))
         write_session(mfa())
+    log('INFO', "Script executed successfully!")
