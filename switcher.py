@@ -133,8 +133,8 @@ def assume_role():
         command += " --duration-seconds 3600"
     else:
         command += " --duration-seconds {}".format(profile_json['duration'])
-    command += " --serial-number {} --token-code ".format(profile_json['mfa'])
-    command += getpass('[INPUT] - MFA Code: (Hidden) ')
+        command += " --serial-number {} --token-code ".format(profile_json['mfa'])
+        command += getpass('[INPUT] - MFA Code: (Hidden) ')
 
     return command
 
