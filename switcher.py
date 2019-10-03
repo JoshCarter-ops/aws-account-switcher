@@ -139,15 +139,25 @@ def assume_role():
     return command
 
 
+def export_to_envs(credentials):
+    export = 'AWS_MFA_EXPIRY={}'.format(credentials['aws_mfa_expiry = '])
+    export += '\nAWS_ACCESS_KEY_ID={}'.format(credentials['aws_access_key_id = '])
+    export += '\nAWS_SECRET_ACCESS_KEY={}'.format(credentials['aws_secret_access_key = '])
+    export += '\nAWS_SESSION_TOKEN={}'.format(credentials['aws_session_token = '])
+    with open(homedir + '/.aws_environment', 'w') as new_file:
+        new_file.write(export)
+        new_file.close()
+
+
 def write_session(command):
     credentials = {'profile': '[default]', 'output = ': 'json', 'region = ': 'eu-west-1'}
     json_creds = json.loads(bash(command))
-
     cred_info = json_creds['Credentials']
 
     credentials['aws_access_key_id = '] = cred_info['AccessKeyId']
     credentials['aws_session_token = '] = cred_info['SessionToken']
     credentials['aws_secret_access_key = '] = cred_info['SecretAccessKey']
+    credentials['aws_mfa_expiry = '] = cred_info['Expiration']
 
     with open(aws_credentials_master, 'w') as aws_cred_file:
         for k, v in credentials.items():
@@ -155,22 +165,28 @@ def write_session(command):
                 aws_cred_file.write(v + '\n')
             else:
                 aws_cred_file.write(k + v + '\n')
+    return credentials
 
 
 if __name__ == '__main__':
     account_decision = input(ask_the_question())
     write_standard_account(account_decision)
-    rotate_keys()
+    if profile_object['profiles'][int(account_decision) - 1]['account_number'] != "188420268838":
+        rotate_keys()
     question = '[INFO]: Would you like to assume the {} role?\n[1] YES\n[2] NO\n[INPUT]: '
+
+    aws_vars = ""
 
     if profile_json['role'] != "":
         decider = input(question.format(profile_json['role']))
         if str(decider) == "1":
-            write_session(assume_role())
+            aws_vars = write_session(assume_role())
         else:
             log('INFO', "Logging in with {}'s mfa.".format(username))
-            write_session(mfa())
+            aws_vars = write_session(mfa())
     else:
         log('INFO', "No role found in profiles.json, logging in with {}'s mfa.".format(username))
-        write_session(mfa())
+        aws_vars = write_session(mfa())
+
+    export_to_envs(aws_vars)
     log('INFO', "Script executed successfully!")
