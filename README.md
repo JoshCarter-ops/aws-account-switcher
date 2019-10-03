@@ -21,6 +21,8 @@ Repository to allow you to switch to various AWS Accounts, rotate your access ke
  This was initially written by myself for the developers where I work, it was suggested that I open source it because
   'it's a nightmare switching accounts/roles manually!'. 
  `
+ 
+`SIDE-NOTE: Durarion is in seconds...3600 for an hour is the default`
 
 ### profiles.json example
 `
@@ -33,7 +35,8 @@ Repository to allow you to switch to various AWS Accounts, rotate your access ke
       "username": "someone@example.com",
       "aws_access_key_id": "PERSONALACCESSKEY",
       "aws_secret_access_key": "PERSONALSECRETACCESSKEY",
-      "mfa": "arn:aws:iam::0011223344:mfa/someone@example.com"
+      "mfa": "arn:aws:iam::0011223344:mfa/someone@example.com",
+      "duration": ""
     },
     {
       "type": "work",
@@ -42,7 +45,8 @@ Repository to allow you to switch to various AWS Accounts, rotate your access ke
       "username": "someone@work.com",
       "aws_access_key_id": "WORKACCESSKEY",
       "aws_secret_access_key": "WORKSECRETACCESSKEY",
-      "mfa": "arn:aws:iam::0011223355:mfa/someone@example.com"
+      "mfa": "arn:aws:iam::0011223355:mfa/someone@example.com",
+      "duration": ""
     }
   ]
 }
