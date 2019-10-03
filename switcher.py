@@ -171,8 +171,7 @@ def write_session(command):
 if __name__ == '__main__':
     account_decision = input(ask_the_question())
     write_standard_account(account_decision)
-    if profile_object['profiles'][int(account_decision) - 1]['account_number'] != "188420268838":
-        rotate_keys()
+    rotate_keys()
     question = '[INFO]: Would you like to assume the {} role?\n[1] YES\n[2] NO\n[INPUT]: '
 
     aws_vars = ""
