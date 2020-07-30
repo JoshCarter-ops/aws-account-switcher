@@ -18,14 +18,9 @@ Repository to allow you to switch to various AWS Accounts, rotate your access ke
 3. Run using `python3 switcher.py`
 
 ### Why?
-`This script was written to enable read only users to assume a role to run cli commands that they normally wouldn't
- have permissions to do. 
- The script since then has developed into a auto key rotator and account switcher. 
- This was initially written by myself for the developers where I work, it was suggested that I open source it because
-  'it's a nightmare switching accounts/roles manually!'. 
- `
- 
-`SIDE-NOTE: Durarion is in seconds...3600 for an hour is the default`
+This script was written to enable read only users to assume a role to run cli commands that they normally wouldn't have permissions to do. 
+The script since then has developed into a auto key rotator and account switcher. 
+This was initially written by myself for the developers where I work, it was suggested that I open source it because 'it's a nightmare switching accounts/roles manually!'.
 
 ### profiles.json example
 ```
