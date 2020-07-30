@@ -1,7 +1,9 @@
 ## AWS Account Switcher
 
-`WARNING => Make a backup of your .aws/credentials folder before using this utility!
- Also the default rotation time is 30 days!`
+```WARNING
+Make a backup of your .aws/credentials folder before using this utility!
+Also the default rotation time is 30 days!
+```
 
 Repository to allow you to switch to various AWS Accounts, rotate your access keys and assume roles on the command line without the need of exporting those pesky bash env vars!
 
