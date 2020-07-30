@@ -28,7 +28,7 @@ Repository to allow you to switch to various AWS Accounts, rotate your access ke
 `SIDE-NOTE: Durarion is in seconds...3600 for an hour is the default`
 
 ### profiles.json example
-`
+```
 {
   "profiles": [
     {
@@ -53,4 +53,4 @@ Repository to allow you to switch to various AWS Accounts, rotate your access ke
     }
   ]
 }
-`
+```
